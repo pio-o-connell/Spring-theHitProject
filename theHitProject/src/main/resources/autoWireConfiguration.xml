@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-init-method="init" default-destroy-method="destroy">
+
+	<!--Spring autowiring byName example -->
+	<bean id="song" class="com.theHit.domain.Song">
+		<constructor-arg name="name" value="silly nsss"></constructor-arg>
+		<constructor-arg name="lyrics" value="Hello world"></constructor-arg>
+	</bean>
+
+	<!-- autowiring byName -->
+	<bean id="autoWireExampleBean" class="com.theHit.interfaces.impl.SongWriterImpl"
+		autowire="byName">
+		<property name="firstname" value="Peter"></property>
+		<property name="lastname" value="Summers"></property>
+		<property name="age" value="33"></property>
+	</bean>
+
+	<!-- Autowiring byType example -->
+	<bean id="autoWireExampleByTypeBean" class="com.theHit.interfaces.impl.SingerImpl"
+		autowire="byType">
+		<property name="firstname" value="YourName"></property>
+		<property name="lastname" value="YourSurname"></property>
+		<property name="age" value="21"></property>
+	</bean>
+
+	<!--Spring autowiring byName example <bean id="anotherSongType" class="com.theHit.domain.Song"> 
+		<constructor-arg name="name" value="another song"></constructor-arg> <constructor-arg 
+		name="lyrics" value="another songs lyrics"></constructor-arg> </bean> -->
+
+	<!-- Autowiring byConstructor example -->
+	<bean id="autoWirebyConstructor" class="com.theHit.interfaces.impl.SongWriterImpl"
+		autowire="constructor">
+		<constructor-arg name="firstname" value="Jane"></constructor-arg>
+		<constructor-arg name="lastname" value="Lee"></constructor-arg>
+		<constructor-arg name="age" value="33"></constructor-arg>
+	</bean>
+
+</beans>

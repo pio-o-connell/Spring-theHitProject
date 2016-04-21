@@ -1,5 +1,7 @@
 package com.theHit.domain;
 
+import org.springframework.beans.factory.annotation.Required;
+
 public class Venue {
 	private String name, addressLine1, addressLine2, country;
 	private int capacity;
@@ -19,6 +21,8 @@ public class Venue {
 		System.out.println("VENUE CONSTRUCTOR: The country of the venue are:"+country); 
 	}
 
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -54,7 +58,8 @@ public class Venue {
 	public int getCapacity() {
 		return capacity;
 	}
-
+	
+	@Required
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
