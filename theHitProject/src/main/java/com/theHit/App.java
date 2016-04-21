@@ -1,5 +1,7 @@
 package com.theHit;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,25 +15,65 @@ import com.theHit.interfaces.Currency;
 import com.theHit.interfaces.Songwriter;
 import com.theHit.interfaces.impl.SingerImpl;
 import com.theHit.interfaces.impl.SongWriterImpl;
+import com.theHit.jdbctemplate.dao.impl.SongwriterJdbcDaoSupport;
+import com.theHit.jdbctemplate.dao.impl.SongwriterJdbcNameParmTemplate;
+import com.theHit.jdbctemplate.dao.impl.SongwriterJdbcTemplate;
 
 public class App {
+
 	private static ApplicationContext autoWireContext;
 
 	public static void main(String[] args) {
-		autoWireContext = new ClassPathXmlApplicationContext("autoWireConfiguration1.xml");
-		SongWriterImpl songWriterImpl = (SongWriterImpl) autoWireContext.getBean("songWriterImpl");
-		System.out.println(songWriterImpl.toString());
+		autoWireContext = new ClassPathXmlApplicationContext("db-configuration.xml");
 
-		System.out.println("Firstname:" + songWriterImpl.getFirstname() + ", Lastname: " + songWriterImpl.getLastname()
-				+ ", age:" + songWriterImpl.getAge() + ", song name:" + songWriterImpl.getSong().getName()
-				+ ", song lyrics:" + songWriterImpl.getSong().getLyrics());
+	/*	SongwriterJdbcTemplate songwriterJdbcTemplate = (SongwriterJdbcTemplate) autoWireContext
+				.getBean("songwriterJdbcTemplate");
+		songwriterJdbcTemplate.createSongwriter("Mary", "O'Brien", 33);*/
+		
+	/*	SongwriterJdbcDaoSupport songwriterDaoJdbcSupport= (SongwriterJdbcDaoSupport) autoWireContext
+				.getBean("songwriterJdbcDaoSupport");
+//		SongwriterDaoJdbcSupport.createSongwriter("Mary", "O'Brien", 33);
+		
+		/*List<SongWriterImpl> songwriters = songwriterJdbcTemplate.listSongwriters();
+		for (SongWriterImpl record : songwriters) {
+			System.out.print("Firstname : " + record.getFirstname() );
+			System.out.print(", Lastname : " + record.getLastname() );
+			System.out.print(", Lastname : " + record.getId() );
+			System.out.println(", Age : " + record.getAge());
+		} */
+	/*	List<SongWriterImpl> songwriters = songwriterDaoJdbcSupport.listSongwriters();
+		for (SongWriterImpl record : songwriters) {
+			System.out.print("Firstname : " + record.getFirstname() );
+			System.out.print(", Lastname : " + record.getLastname() );
+			System.out.print(", Lastname : " + record.getId() );
+			System.out.println(", Age : " + record.getAge());
+		} */
+		
+		SongwriterJdbcNameParmTemplate namedParmTemplate=(SongwriterJdbcNameParmTemplate)autoWireContext.getBean("songwriterJdbcNameParmTemplate");
+		namedParmTemplate.createSongwriter("Mary", "Daly", 33);
+
 	}
 }
 
 /*
+ * public class App { private static ApplicationContext autoWireContext;
+ * 
+ * public static void main(String[] args) { autoWireContext = new
+ * ClassPathXmlApplicationContext("autoWireConfiguration1.xml"); SongWriterImpl
+ * songWriterImpl = (SongWriterImpl) autoWireContext.getBean("songWriterImpl");
+ * System.out.println(songWriterImpl.toString());
+ * 
+ * System.out.println("Firstname:" + songWriterImpl.getFirstname() +
+ * ", Lastname: " + songWriterImpl.getLastname() + ", age:" +
+ * songWriterImpl.getAge() + ", song name:" + songWriterImpl.getSong().getName()
+ * + ", song lyrics:" + songWriterImpl.getSong().getLyrics()); } }
+ */
+
+/*
  * public class App {
  * 
- * private static ApplicationContext context, autoWirecontext,annotationContext;
+ * private static ApplicationContext context, autoWirecontext,
+ * annotationContext;
  * 
  * public static void main(String args[]) {
  * 
