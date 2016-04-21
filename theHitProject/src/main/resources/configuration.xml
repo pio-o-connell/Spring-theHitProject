@@ -1,0 +1,71 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+    default-init-method="init" default-destroy-method="destroy">
+    
+<bean id="ourFirstBean" class="com.theHit.interfaces.impl.SongWriterImpl"></bean>
+	
+<bean id="marysSong" class="com.theHit.domain.Song">
+		<constructor-arg name="name" value="Mary's farm"></constructor-arg>
+		<constructor-arg name="lyrics" value="Mary has a little lamb, her fleece is white as snow"></constructor-arg>
+</bean>
+
+<bean id="setterBeanSong" class="com.theHit.domain.Song">
+		<property name="name" value="Setter Marys song"></property>
+		<property name="lyrics" value="Setter lyrics lyrics"></property>		
+</bean>
+
+<bean id="setterSongwriter" class="com.theHit.interfaces.impl.SongWriterImpl">
+	<property name="firstname" value="Donna"></property>
+	<property name="lastname" value="O'Shea"></property>	
+	<property name="age" value="21"></property>	
+	<property name="song" ref="setterBeanSong"></property>
+</bean>
+
+<bean id="currency" class="com.theHit.factories.CurrencyFactory" factory-method="createCurrency">
+	<constructor-arg name="country" value="Ireland"></constructor-arg>
+</bean>
+
+<bean id="theStage" class="com.theHit.domain.Stage" factory-method="getInstance">
+</bean>
+
+<bean id="theStage1" class="com.theHit.domain.Stage" factory-method="getInstance">
+</bean>
+
+<bean id="ticket" class="com.theHit.domain.Ticket">
+	<constructor-arg name="ticketClass" value="premium"></constructor-arg>
+	<constructor-arg name="ticketNumber" value="1"></constructor-arg>
+</bean>
+
+<bean id="ticketPrototype" class="com.theHit.domain.Ticket" scope="prototype">
+	<constructor-arg name="ticketClass" value="premium"></constructor-arg>
+	<constructor-arg name="ticketNumber" value="2"></constructor-arg>
+</bean>
+
+
+<bean id="theStageInitDestroyExample" class="com.theHit.domain.Stage" factory-method="getInstance"></bean>
+<bean id="MarysSong" class="com.theHit.domain.Song">
+	<constructor-arg name="lyrics" value=" Oh Danny Boy, the pipes the pipes are calling. From glen to glen... "></constructor-arg>
+	<constructor-arg name="name" value="Oh Danny Boy"></constructor-arg>
+</bean>
+
+<bean id="MarySongWriter" class="com.theHit.interfaces.impl.SongWriterImpl">
+	<constructor-arg name="firstname" value="Mary"></constructor-arg>
+	<constructor-arg name="lastname" value="Jones"></constructor-arg>
+	<constructor-arg name="age" value="21"></constructor-arg>
+	<constructor-arg name="song" ref="MarysSong"></constructor-arg>	
+</bean>
+
+<bean id="setterVenue" class="com.theHit.domain.Venue">
+	<property name="name" value="Donna"></property>
+	<property name="addressLine1" value="29,Highfield Cresent"></property>	
+	<property name="addressLine2" value="Greenane"></property>	
+	<property name="country" value="Eire"></property>
+	<property name="capacity" value="10000"></property>
+</bean>
+
+
+
+</beans>
