@@ -10,6 +10,7 @@
 		<config>src/main/resources/configuration.xml</config>
 		<config>src/main/resources/autoWireConfiguration.xml</config>
 		<config>src/main/resources/configuration-wiring.xml</config>
+		<config>src/main/resources/autoWireConfiguration1.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
