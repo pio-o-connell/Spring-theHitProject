@@ -24,7 +24,7 @@ public class SongWriterImpl extends Person implements Songwriter {
 		
 	}
 	
-	public SongWriterImpl( String firstname, String lastname,int age,Song song){
+	/*public SongWriterImpl( String firstname, String lastname,int age,Song song){
 	//	super(firstname,lastname,age); - because using bean inheritance
 		this.firstname=firstname;
 		this.lastname=lastname;
@@ -33,7 +33,7 @@ public class SongWriterImpl extends Person implements Songwriter {
 		
 		System.out.println("fistname: "+ firstname +" lastname: "+ lastname +" age: " + age
 				+" song name: "+ song.getName() + " song lyrics: "+ song.getLyrics());
-	}
+	}*/
 	
 	/*@Autowired
 	public SongWriterImpl(@Value("Mary") String firstname, @Value("O'Brien") String lastname, @Value("33") int age,  Song song) {
@@ -47,6 +47,10 @@ public class SongWriterImpl extends Person implements Songwriter {
 		this.song = song;		
 	};*/
 	
+	@Autowired
+	public SongWriterImpl(@Value("${firstname}") String firstname, @Value("${lastname}") String lastname, @Value("${age}") int age) {
+		super(firstname, lastname, age);
+	};
 	
 	public String getFirstname() {
 		return firstname;

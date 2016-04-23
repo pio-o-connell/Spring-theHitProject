@@ -1,5 +1,6 @@
 package com.theHit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -23,35 +24,57 @@ public class App {
 
 	private static ApplicationContext autoWireContext;
 
+/*	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>		
+</bean>*/
+	
 	public static void main(String[] args) {
 		autoWireContext = new ClassPathXmlApplicationContext("db-configuration.xml");
-
+		SongwriterJdbcTemplate  singerJDBCTemplate 	= (	SongwriterJdbcTemplate ) autoWireContext.getBean("SongwriterJdbcTemplate"); ;
+		
+		//= (SongwriterJdbcDaoSupport) autoWireContext
+		//		.getBean("songwriterJdbcTemplate");;
+		
 	/*	SongwriterJdbcTemplate songwriterJdbcTemplate = (SongwriterJdbcTemplate) autoWireContext
 				.getBean("songwriterJdbcTemplate");
-		songwriterJdbcTemplate.createSongwriter("Mary", "O'Brien", 33);*/
+		songwriterJdbcTemplate.createSongwriter("Mary", "O'Brien", 33);
 		
-	/*	SongwriterJdbcDaoSupport songwriterDaoJdbcSupport= (SongwriterJdbcDaoSupport) autoWireContext
-				.getBean("songwriterJdbcDaoSupport");
-//		SongwriterDaoJdbcSupport.createSongwriter("Mary", "O'Brien", 33);
+		SongwriterJdbcDaoSupport songwriterDaoJdbcSupport= (SongwriterJdbcDaoSupport) autoWireContext
+				.getBean("songwriterJdbcDaoSupport");*/
+//		SongwriterJdbcDaoSupport.createSongwriter("Mary", "O'Brien", 33);
 		
-		/*List<SongWriterImpl> songwriters = songwriterJdbcTemplate.listSongwriters();
+/*		List<SongWriterImpl> songwriters = songwriterJdbcTemplate.listSongwriters();
 		for (SongWriterImpl record : songwriters) {
 			System.out.print("Firstname : " + record.getFirstname() );
 			System.out.print(", Lastname : " + record.getLastname() );
 			System.out.print(", Lastname : " + record.getId() );
 			System.out.println(", Age : " + record.getAge());
-		} */
-	/*	List<SongWriterImpl> songwriters = songwriterDaoJdbcSupport.listSongwriters();
-		for (SongWriterImpl record : songwriters) {
-			System.out.print("Firstname : " + record.getFirstname() );
-			System.out.print(", Lastname : " + record.getLastname() );
-			System.out.print(", Lastname : " + record.getId() );
-			System.out.println(", Age : " + record.getAge());
-		} */
+		} 
+*/
 		
-		SongwriterJdbcNameParmTemplate namedParmTemplate=(SongwriterJdbcNameParmTemplate)autoWireContext.getBean("songwriterJdbcNameParmTemplate");
+	/*	SongwriterJdbcNameParmTemplate namedParmTemplate=(SongwriterJdbcNameParmTemplate)autoWireContext.getBean("namedParmTemplate");
 		namedParmTemplate.createSongwriter("Mary", "Daly", 33);
 
+		List<SongWriterImpl> songwriters1 = namedParmTemplate.listSongwriters();
+		for (SongWriterImpl record : songwriters1) {
+			System.out.print("Firstname : " + record.getFirstname() );
+			System.out.print(", Lastname : " + record.getLastname() );
+			System.out.print(", Lastname : " + record.getId() );
+			System.out.println(", Age : " + record.getAge());
+		} */
+		
+		System.out.println("------Batch Records Creation--------" );
+		SongWriterImpl songwriter1=new SongWriterImpl("Peter","Summer", 33);
+		SongWriterImpl songwriter2=new SongWriterImpl("lola","jaba", 22);
+		SongWriterImpl songwriter3=new SongWriterImpl("ssss","ssss", 212);
+
+		List<SongWriterImpl> batchSongwriters=new ArrayList<SongWriterImpl>();
+		batchSongwriters.add(songwriter1);
+		batchSongwriters.add(songwriter2);
+		batchSongwriters.add(songwriter3);
+		
+		singerJDBCTemplate.batchUpdate(batchSongwriters);
+		
 	}
 }
 

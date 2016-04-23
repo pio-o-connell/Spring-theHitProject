@@ -89,5 +89,11 @@ public class SongwriterJdbcNameParmTemplate implements SongwriterDAO{
 		
 	}
 
+	@Override
+	public void batchUpdate(List<SongWriterImpl> songwriters) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

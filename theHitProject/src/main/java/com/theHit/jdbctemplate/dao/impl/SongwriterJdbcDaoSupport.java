@@ -1,14 +1,27 @@
 package com.theHit.jdbctemplate.dao.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.theHit.interfaces.impl.SongWriterImpl;
 import com.theHit.jdbctemplate.dao.interfaces.SongwriterDAO;
 
-public class SongwriterJdbcDaoSupport extends JdbcDaoSupport implements SongwriterDAO {
 
+public class SongwriterJdbcDaoSupport extends JdbcDaoSupport implements SongwriterDAO {
+//	JdbcTemplate	jdbcTemplateObject;
+	private JdbcTemplate  jdbcTemplateObject;
+	private DataSource dataSource;
+	
 	@Override
 	public void createSongwriter(String firstname, String lastname, Integer age) {
 		String SQL = "insert into Songwriter (firstname, lastname, age) values (?, ?, ?)";
@@ -65,6 +78,12 @@ public class SongwriterJdbcDaoSupport extends JdbcDaoSupport implements Songwrit
 		List<SongWriterImpl> songwriterList = getJdbcTemplate().query(SQL, 
 						new SongwriterMapper());
 		return songwriterList;
+	}
+
+	@Override
+	public void batchUpdate(final List<SongWriterImpl> songwriters) {
+		
+		
 	}
 
 }

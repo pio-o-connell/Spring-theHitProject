@@ -55,7 +55,11 @@ public interface SongwriterDAO {
 	public List<SongWriterImpl> listSongwriters();
 	
 	
-	
+	/**
+	 * This is the method to be used to perform a 
+	 * batch update into the Singer table.
+	 */
+	 public void batchUpdate(final List<SongWriterImpl> songwriters);
 	
 	
 }
